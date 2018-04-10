@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_reader)
 
         text.documentLayoutParams.textAlignment = TextAlignment.JUSTIFIED
-        text.documentLayoutParams.hyphenator = DefaultHyphenator.getInstance(DefaultHyphenator.HyphenPattern.RU)
+        text.documentLayoutParams.hyphenator = DefaultHyphenator.getInstance(com.bluejamesbond.text.R.raw.ru, this)
         text.documentLayoutParams.isHyphenated = true
         text.text = String(resources.openRawResource(R.raw.fish).readBytes())
 
