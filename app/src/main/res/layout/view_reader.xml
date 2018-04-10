@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ru.lionzxy.yetanotherreader.TouchDelimeter xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ru.lionzxy.yetanotherreader.MainActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.bluejamesbond.text.DocumentView
+                android:id="@+id/text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:documentView_cacheConfig="auto_quality"
+                app:documentView_hyphen="-"
+                app:documentView_insetPadding="20dp"
+                tools:documentView_textSize="24sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Test" />
+        </LinearLayout>
+    </ScrollView>
+
+
+    <ru.lionzxy.yetanotherreader.TapDetectView
+        android:id="@+id/centerClick"
+        android:layout_width="0px"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+</ru.lionzxy.yetanotherreader.TouchDelimeter>
