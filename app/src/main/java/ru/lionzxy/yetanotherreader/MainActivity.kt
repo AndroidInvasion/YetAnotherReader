@@ -23,6 +23,9 @@ class MainActivity : AppCompatActivity() {
     private var settingsVisible = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val decorView = window.decorView
+        val uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN
+        decorView.systemUiVisibility = uiOptions
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reader)
 
@@ -117,5 +120,15 @@ class MainActivity : AppCompatActivity() {
             text.background = ColorDrawable(resources.getColor(color.backgroundColor))
             text.documentLayoutParams.textColor = resources.getColor(color.textColor)
         }
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (hasFocus) window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_FULLSCREEN
+                or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
     }
 }
