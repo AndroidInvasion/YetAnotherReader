@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Yet Another Reader</string>
+    <string name="reader_day">День</string>
+    <string name="reader_night">Ночь</string>
+    <string name="reader_back">Назад</string>
+    <string name="reader_next">Следующая книга</string>
+    <string name="reader_settings">Settings</string>
+    <string name="description_back">На предыдущий экран</string>
+    <string name="description_settings">Настройки</string>
+    <string name="description_down">Меньше шрифт</string>
+    <string name="description_up">Больше шрифт</string>
+</resources>

@@ -1,9 +1,11 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@android:color/white"
-    android:padding="10dp">
+    android:padding="10dp"
+    tools:ignore="Overdraw">
 
     <LinearLayout
         android:id="@+id/settings_text_decrease"
@@ -17,11 +19,13 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/description_down"
             android:src="@drawable/ic_text_fields_black_24dp" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/description_down"
             android:src="@drawable/ic_arrow_drop_down_black_24dp" />
     </LinearLayout>
 
@@ -38,11 +42,13 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/description_up"
             android:src="@drawable/ic_text_fields_black_24dp" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/description_up"
             android:src="@drawable/ic_arrow_drop_up_black_24dp" />
     </LinearLayout>
 
@@ -90,34 +96,6 @@
 
 
     <TextView
-        android:id="@+id/settings_night"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:layout_weight="1"
-        android:background="@drawable/rounded_button_left"
-        android:gravity="center"
-        android:text="@string/reader_night"
-        android:textColor="@android:color/black"
-        app:layout_constraintEnd_toStartOf="@id/settings_day"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/settings_text_decrease" />
-
-    <TextView
-        android:id="@+id/settings_day"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:layout_weight="1"
-        android:background="@drawable/rounded_button_right_activate"
-        android:gravity="center"
-        android:text="@string/reader_day"
-        android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/settings_night"
-        app:layout_constraintTop_toBottomOf="@id/settings_text_decrease" />
-
-    <TextView
         android:id="@+id/settings_back"
         android:layout_width="0dp"
         android:layout_height="40dp"
@@ -129,7 +107,7 @@
         android:textColor="@android:color/black"
         app:layout_constraintEnd_toStartOf="@id/settings_next"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/settings_night" />
+        app:layout_constraintTop_toBottomOf="@id/settings_color_black" />
 
     <TextView
         android:id="@+id/settings_next"
@@ -143,5 +121,5 @@
         android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/settings_back"
-        app:layout_constraintTop_toBottomOf="@id/settings_night" />
+        app:layout_constraintTop_toBottomOf="@id/settings_color_black" />
 </android.support.constraint.ConstraintLayout>

@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -16,8 +15,8 @@
             style="?android:attr/progressBarStyle"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:theme="@style/ReaderTheme.ProgressBar"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:theme="@style/ReaderTheme.ProgressBar" />
 
         <View
             android:id="@+id/reader_blackout"
@@ -55,7 +54,7 @@
         android:visibility="gone"
         tools:visibility="visible">
 
-        <ru.lionzxy.yetanotherreader.view.SeekBarForScrollView
+        <ru.lionzxy.yetanotherreaderlibrary.view.SeekBarForScrollView
             android:id="@+id/reader_seek_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ru.lionzxy.yetanotherreader.view.TouchDelimeter xmlns:android="http://schemas.android.com/apk/res/android"
+<ru.lionzxy.yetanotherreaderlibrary.view.TouchDelimeter xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ru.lionzxy.yetanotherreader.MainActivity">
+    tools:context=".ReaderFragment">
 
     <ScrollView
         android:id="@+id/reader_scrollview"
@@ -25,18 +25,18 @@
                 app:documentView_insetPadding="20dp"
                 tools:documentView_textSize="24sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Test" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary" />
         </LinearLayout>
     </ScrollView>
 
 
-    <ru.lionzxy.yetanotherreader.view.TapDetectView
+    <ru.lionzxy.yetanotherreaderlibrary.view.TapDetectView
         android:id="@+id/centerClick"
         android:layout_width="0px"
         android:layout_height="match_parent"
         android:layout_weight="1" />
 
-</ru.lionzxy.yetanotherreader.view.TouchDelimeter>
+</ru.lionzxy.yetanotherreaderlibrary.view.TouchDelimeter>

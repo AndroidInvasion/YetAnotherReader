@@ -1,4 +1,4 @@
-package ru.lionzxy.yetanotherreader.view
+package ru.lionzxy.yetanotherreaderlibrary.view
 
 import android.content.Context
 import android.support.v7.widget.AppCompatSeekBar
