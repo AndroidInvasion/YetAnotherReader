@@ -1,4 +1,6 @@
-package ru.lionzxy.yetanotherreader
+package ru.lionzxy.yetanotherreader.data
+
+import ru.lionzxy.yetanotherreader.R
 
 /**
  * @author Nikita Kulikov <nikita@kulikof.ru>

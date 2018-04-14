@@ -10,12 +10,14 @@ import android.util.TypedValue
 import android.view.Menu
 import android.view.View
 import android.view.animation.AnimationUtils
+import com.bluejamesbond.text.DocumentView
 import com.bluejamesbond.text.hyphen.DefaultHyphenator
 import com.bluejamesbond.text.style.TextAlignment
 import kotlinx.android.synthetic.main.activity_reader.*
 import kotlinx.android.synthetic.main.reader_toolbar.*
 import kotlinx.android.synthetic.main.view_reader.*
 import kotlinx.android.synthetic.main.view_reader_settings.*
+import ru.lionzxy.yetanotherreader.data.ReaderColor
 
 
 class MainActivity : AppCompatActivity() {
@@ -32,6 +34,13 @@ class MainActivity : AppCompatActivity() {
         text.documentLayoutParams.textAlignment = TextAlignment.JUSTIFIED
         text.documentLayoutParams.hyphenator = DefaultHyphenator.getInstance(com.bluejamesbond.text.R.raw.ru, this)
         text.documentLayoutParams.isHyphenated = true
+        text.setOnLayoutProgressListener(object : DocumentView.ILayoutProgressListener {
+            override fun onFinish() { progressbar.hide() }
+            override fun onProgressUpdate(progress: Float) {}
+            override fun onCancelled() { progressbar.hide() }
+            override fun onStart() { progressbar.show() }
+        })
+        reader_seek_bar.setScrollView(reader_scrollview)
         text.text = String(resources.openRawResource(R.raw.fish).readBytes())
 
         centerClick.setTapListener({ showInfo(!infoVisible) })
@@ -65,10 +74,10 @@ class MainActivity : AppCompatActivity() {
             text.text = text.text
         }
         settings_text_increase.setOnClickListener {
-            textSize += 2
+            textSize = Math.min(48f, textSize + 2)
             preferences.edit().putFloat("reader_textsize", textSize).apply()
             text.documentLayoutParams.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
-            text.setText(text.text)
+            text.text = text.text
         }
     }
 
@@ -121,6 +130,7 @@ class MainActivity : AppCompatActivity() {
             text.documentLayoutParams.textColor = resources.getColor(color.textColor)
         }
     }
+
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)

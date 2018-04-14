@@ -1,4 +1,4 @@
-package ru.lionzxy.yetanotherreader
+package ru.lionzxy.yetanotherreader.view
 
 import android.content.Context
 import android.util.AttributeSet

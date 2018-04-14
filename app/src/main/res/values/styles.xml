@@ -22,5 +22,8 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
+    <style name="ReaderTheme.ProgressBar" parent="AppTheme">
+        <item name="colorAccent">@color/colorPrimaryDark</item>
+    </style>
 
 </resources>
