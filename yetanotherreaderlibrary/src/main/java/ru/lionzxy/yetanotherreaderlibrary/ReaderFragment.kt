@@ -36,7 +36,7 @@ class ReaderFragment : Fragment() {
     private var book: Book? = null
 
     companion object {
-        val TAG = "ru.lionzxy.yetanotherreaderlibrary.ReaderFragment"
+        const val TAG = "ru.lionzxy.yetanotherreaderlibrary.ReaderFragment"
 
         fun getReaderColor(context: Context): ReaderColor {
             val preferences = context.getSharedPreferences("reader", Context.MODE_PRIVATE)
@@ -90,20 +90,24 @@ class ReaderFragment : Fragment() {
         }
     }
 
-    public fun setBook(book: Book) {
+    @Suppress("unused")
+    fun setBook(book: Book) {
         arguments?.putSerializable("book", book)
         setBookInside(book)
     }
 
-    public fun setNextListener(listener: () -> Unit) {
+    @Suppress("unused")
+    fun setNextListener(listener: () -> Unit) {
         this.nextListener = listener
     }
 
-    public fun setBuyListener(listener: (book: Book?) -> Unit) {
+    @Suppress("unused")
+    fun setBuyListener(listener: (book: Book?) -> Unit) {
         this.buyListener = listener
     }
 
-    public fun setBuyPreview(visible: Boolean) {
+    @Suppress("unused")
+    fun setBuyPreview(visible: Boolean) {
         reader_buy.visibility = if (visible) View.VISIBLE else View.GONE
     }
 

@@ -8,8 +8,8 @@ import java.io.Serializable
  * @date 14.04.18
  */
 
-open class Book(public val title: String,
-                public val author: String,
-                public val bookText: String,
-                public val imageUrl: String = "",
-                public val description: String = "") : Serializable
+open class Book(val title: String,
+                val author: String,
+                val bookText: String,
+                val imageUrl: String = "",
+                val description: String = "") : Serializable

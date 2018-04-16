@@ -13,7 +13,10 @@ import android.widget.SeekBar
  */
 
 class SeekBarForScrollView : AppCompatSeekBar {
-    private val MAX_SEEK_PROGRESS = 1000
+    companion object {
+        private const val MAX_SEEK_PROGRESS = 1000
+    }
+
     private var scrollView: ScrollView? = null
     private var scrollByScrollView = false
 

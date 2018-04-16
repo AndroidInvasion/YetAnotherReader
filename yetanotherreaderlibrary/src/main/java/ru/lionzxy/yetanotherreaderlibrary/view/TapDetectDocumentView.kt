@@ -1,12 +1,12 @@
 package ru.lionzxy.yetanotherreaderlibrary.view
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.support.v4.view.GestureDetectorCompat
 import android.util.AttributeSet
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.widget.ScrollView
-import com.bluejamesbond.text.DocumentView
 
 /**
  * @author Nikita Kulikov <nikita@kulikof.ru>
@@ -22,6 +22,7 @@ class TapDetectDocumentView : ScrollView {
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
     constructor(context: Context) : super(context)
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(ev: MotionEvent?): Boolean {
         super.onTouchEvent(ev)
         if (ev != null) {
@@ -30,6 +31,7 @@ class TapDetectDocumentView : ScrollView {
         return true
     }
 
+    @Suppress("unused")
     fun setTapListener(listener: TapListener) {
         gestureListener.tapListener = listener
     }
