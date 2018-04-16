@@ -5,15 +5,16 @@ import android.support.v4.view.GestureDetectorCompat
 import android.util.AttributeSet
 import android.view.GestureDetector
 import android.view.MotionEvent
-import android.view.View
+import android.widget.ScrollView
+import com.bluejamesbond.text.DocumentView
 
 /**
  * @author Nikita Kulikov <nikita@kulikof.ru>
  * @project YetAnotherReader
- * @date 05.04.18
+ * @date 16.04.18
  */
 
-class TapDetectView : View {
+class TapDetectDocumentView : ScrollView {
     private val gestureListener = GestureListener()
     private val gestureDetector: GestureDetectorCompat = GestureDetectorCompat(context, gestureListener)
 
@@ -22,6 +23,7 @@ class TapDetectView : View {
     constructor(context: Context) : super(context)
 
     override fun onTouchEvent(ev: MotionEvent?): Boolean {
+        super.onTouchEvent(ev)
         if (ev != null) {
             gestureDetector.onTouchEvent(ev)
         }

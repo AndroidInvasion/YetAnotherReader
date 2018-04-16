@@ -19,6 +19,7 @@ import kotlinx.android.synthetic.main.reader_toolbar.*
 import kotlinx.android.synthetic.main.view_reader.*
 import kotlinx.android.synthetic.main.view_reader_settings.*
 import ru.lionzxy.yetanotherreaderlibrary.data.Book
+import ru.lionzxy.yetanotherreaderlibrary.data.GlideApp
 import ru.lionzxy.yetanotherreaderlibrary.data.ReaderColor
 
 /**
@@ -31,9 +32,17 @@ class ReaderFragment : Fragment() {
     private var infoVisible = false
     private var settingsVisible = false
     private var nextListener: (() -> Unit)? = null
+    private var buyListener: ((book: Book?) -> Unit)? = null
+    private var book: Book? = null
 
     companion object {
         val TAG = "ru.lionzxy.yetanotherreaderlibrary.ReaderFragment"
+
+        fun getReaderColor(context: Context): ReaderColor {
+            val preferences = context.getSharedPreferences("reader", Context.MODE_PRIVATE)
+            val id = preferences.getInt("reader_color", ReaderColor.WHITE.id)
+            return ReaderColor.getReaderByNumber(id)
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -63,33 +72,65 @@ class ReaderFragment : Fragment() {
         reader_seek_bar.setScrollView(reader_scrollview)
         toolbar_back.setOnClickListener { activity?.onBackPressed() }
         settings_next.setOnClickListener { nextListener?.invoke() }
+        reader_imread_next.setOnClickListener { nextListener?.invoke() }
+        reader_imread_buy.setOnClickListener { buyListener?.invoke(book) }
+        reader_blackout.setOnClickListener { showSettings(false) }
         settings_back.setOnClickListener { activity?.onBackPressed() }
+        reader_scrollview.viewTreeObserver.addOnGlobalLayoutListener {
+            reader_buy.layoutParams.height = reader_scrollview.height
+            reader_buy.invalidate()
+        }
 
-        centerClick.setTapListener({ showInfo(!infoVisible) })
+        reader_scrollview.setTapListener({ showInfo(!infoVisible) })
         setSettings(view.context)
 
         val book = arguments?.get("book")
         if (book != null && book is Book) {
-            setBook(book)
+            setBookInside(book)
         }
+    }
+
+    public fun setBook(book: Book) {
+        arguments?.putSerializable("book", book)
+        setBookInside(book)
     }
 
     public fun setNextListener(listener: () -> Unit) {
         this.nextListener = listener
     }
 
-    private fun setBook(book: Book) {
+    public fun setBuyListener(listener: (book: Book?) -> Unit) {
+        this.buyListener = listener
+    }
+
+    public fun setBuyPreview(visible: Boolean) {
+        reader_buy.visibility = if (visible) View.VISIBLE else View.GONE
+    }
+
+    private fun setBookInside(book: Book) {
+        this.book = book
         toolbar_title.text = book.title
         toolbar_author.text = book.author
         text.text = book.bookText
+        reader_imread_booktitle.text = book.title
+        reader_imread_bookauthor.text = book.author
+        reader_imread_bookdescription.text = book.description
+        if (book.imageUrl.isNotEmpty()) {
+            GlideApp.with(this)
+                    .load(book.imageUrl)
+                    .placeholder(R.drawable.book)
+                    .error(R.drawable.book)
+                    .into(reader_imread_image)
+        } else {
+            reader_imread_image.setImageResource(R.drawable.book)
+        }
     }
 
     private fun setSettings(context: Context) {
         val preferences = context.getSharedPreferences("reader", Context.MODE_PRIVATE)
-        val readerColor = preferences.getInt("reader_color", ReaderColor.WHITE.id)
+        val reader = getReaderColor(context)
         var textSize = preferences.getFloat("reader_textsize", 24f)
 
-        val reader = ReaderColor.getReaderByNumber(readerColor)
         setReaderColor(reader)
 
         text.documentLayoutParams.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
@@ -153,14 +194,27 @@ class ReaderFragment : Fragment() {
     }
 
     @Suppress("DEPRECATION")
-    public fun setReaderColor(color: ReaderColor) {
+    private fun setReaderColor(color: ReaderColor) {
+        val textColor: Int
+        val background: ColorDrawable
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            text.background = ColorDrawable(resources.getColor(color.backgroundColor, context?.theme))
-            text.documentLayoutParams.textColor = resources.getColor(color.textColor, context?.theme)
+            background = ColorDrawable(resources.getColor(color.backgroundColor, context?.theme))
+            textColor = resources.getColor(color.textColor, context?.theme)
         } else {
-            text.background = ColorDrawable(resources.getColor(color.backgroundColor))
-            text.documentLayoutParams.textColor = resources.getColor(color.textColor)
+            background = ColorDrawable(resources.getColor(color.backgroundColor))
+            textColor = resources.getColor(color.textColor)
         }
+
+        text.background = background
+        text.documentLayoutParams.textColor = textColor
+        reader_scrollview.background = background
+        reader_buy.background = background
+        reader_imread_title.setTextColor(textColor)
+        reader_imread_bookauthor.setTextColor(textColor)
+        reader_imread_bookdescription.setTextColor(textColor)
+        reader_imread_booktitle.setTextColor(textColor)
+        reader_buy.invalidate()
+
     }
 
 }

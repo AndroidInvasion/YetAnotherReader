@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ru.lionzxy.yetanotherreaderlibrary.view.TouchDelimeter xmlns:android="http://schemas.android.com/apk/res/android"
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ReaderFragment">
 
-    <ScrollView
+    <ru.lionzxy.yetanotherreaderlibrary.view.TapDetectDocumentView
         android:id="@+id/reader_scrollview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -25,18 +26,102 @@
                 app:documentView_insetPadding="20dp"
                 tools:documentView_textSize="24sp" />
 
-            <View
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/reader_buy"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/colorPrimary" />
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/reader_imread_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="20dp"
+                    android:text="@string/reader_imread"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toTopOf="@id/reader_imread_image"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed" />
+
+                <ImageView
+                    android:id="@+id/reader_imread_image"
+                    android:layout_width="106dp"
+                    android:layout_height="150dp"
+                    android:contentDescription="@string/reader_imread_cover"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/book"
+                    app:layout_constraintBottom_toTopOf="@id/reader_imread_buy"
+                    app:layout_constraintTop_toBottomOf="@id/reader_imread_title" />
+
+                <TextView
+                    android:id="@+id/reader_imread_booktitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                    app:layout_constraintStart_toEndOf="@id/reader_imread_image"
+                    app:layout_constraintTop_toTopOf="@id/reader_imread_image"
+                    tools:text="Заголовок книги" />
+
+                <TextView
+                    android:id="@+id/reader_imread_bookauthor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:textColor="@android:color/black"
+                    app:layout_constraintStart_toEndOf="@id/reader_imread_image"
+                    app:layout_constraintTop_toBottomOf="@id/reader_imread_booktitle"
+                    tools:text="Джон Голд" />
+
+                <TextView
+                    android:id="@+id/reader_imread_bookdescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:ellipsize="end"
+                    android:maxLines="6"
+                    android:scrollHorizontally="true"
+                    android:singleLine="false"
+                    android:textColor="@android:color/black"
+                    app:layout_constraintStart_toEndOf="@id/reader_imread_image"
+                    app:layout_constraintTop_toBottomOf="@id/reader_imread_bookauthor"
+                    tools:text="Джон Голдsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss sdfsdfdsfsdf sdfassdfsd sdfdsfsdfdsf" />
+
+                <Button
+                    android:id="@+id/reader_imread_buy"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/rounded_button"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:text="@string/reader_imread_buy"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    app:layout_constraintBottom_toTopOf="@id/reader_imread_next"
+                    app:layout_constraintTop_toBottomOf="@id/reader_imread_image" />
+
+                <Button
+                    android:id="@+id/reader_imread_next"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/rounded_button"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:text="@string/reader_imread_next"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/reader_imread_buy" />
+            </android.support.constraint.ConstraintLayout>
         </LinearLayout>
-    </ScrollView>
-
-
-    <ru.lionzxy.yetanotherreaderlibrary.view.TapDetectView
-        android:id="@+id/centerClick"
-        android:layout_width="0px"
-        android:layout_height="match_parent"
-        android:layout_weight="1" />
-
-</ru.lionzxy.yetanotherreaderlibrary.view.TouchDelimeter>
+    </ru.lionzxy.yetanotherreaderlibrary.view.TapDetectDocumentView>
+</merge>

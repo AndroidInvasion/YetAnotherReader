@@ -9,4 +9,8 @@
     <string name="description_settings">Настройки</string>
     <string name="description_down">Меньше шрифт</string>
     <string name="description_up">Больше шрифт</string>
+    <string name="reader_imread">Вы прочитали:</string>
+    <string name="reader_imread_buy">Купить</string>
+    <string name="reader_imread_next">Следующая книга</string>
+    <string name="reader_imread_cover">Обложка книги</string>
 </resources>
