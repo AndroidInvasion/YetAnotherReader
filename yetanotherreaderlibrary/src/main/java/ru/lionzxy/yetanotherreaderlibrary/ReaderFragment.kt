@@ -111,6 +111,15 @@ class ReaderFragment : Fragment() {
         reader_buy.visibility = if (visible) View.VISIBLE else View.GONE
     }
 
+    @Suppress("unused")
+    fun setProgressBarVisible(visible: Boolean) {
+        if (visible) {
+            progressbar.show()
+        } else {
+            progressbar.hide()
+        }
+    }
+
     private fun setBookInside(book: Book) {
         this.book = book
         toolbar_title.text = book.title
