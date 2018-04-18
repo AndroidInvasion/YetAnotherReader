@@ -92,7 +92,7 @@ class ReaderFragment : Fragment() {
 
     @Suppress("unused")
     fun setBook(book: Book) {
-        reader_scrollview.scrollTo(0, 0)
+        reader_scrollview.scrollTo(reader_scrollview.scrollX, 0)
         arguments?.putSerializable("book", book)
         setBookInside(book)
     }
