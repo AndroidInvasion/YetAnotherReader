@@ -115,8 +115,10 @@ class ReaderFragment : Fragment() {
     fun setProgressBarVisible(visible: Boolean) {
         if (visible) {
             progressbar.show()
+            reader_scrollview.visibility = View.INVISIBLE
         } else {
             progressbar.hide()
+            reader_scrollview.visibility = View.VISIBLE
         }
     }
 
