@@ -74,14 +74,14 @@ class ReaderFragment : Fragment() {
         settings_next.setOnClickListener { nextListener?.invoke() }
         reader_imread_next.setOnClickListener { nextListener?.invoke() }
         reader_imread_buy.setOnClickListener { buyListener?.invoke(book) }
-        reader_blackout.setOnClickListener { showSettings(false) }
+        reader_blackout.setOnClickListener { showInfo(false) }
         settings_back.setOnClickListener { activity?.onBackPressed() }
         reader_scrollview.viewTreeObserver.addOnGlobalLayoutListener {
             reader_buy.layoutParams.height = reader_scrollview.height
             reader_buy.invalidate()
         }
 
-        reader_scrollview.setTapListener({ showInfo(!infoVisible) })
+        text.setTapListener({ showInfo(!infoVisible) })
         setSettings(view.context)
 
         val book = arguments?.get("book")
@@ -173,9 +173,14 @@ class ReaderFragment : Fragment() {
     private fun showInfo(visible: Boolean) {
         reader_top_settings.visibility = if (visible) View.VISIBLE else View.GONE
         reader_bottom_settings.visibility = if (visible) View.VISIBLE else View.GONE
+        reader_blackout.visibility = if (visible) View.VISIBLE else View.GONE
+
         if (visible) {
             toolbar_settings.isClickable = false
             toolbar_settings.setOnClickListener { showSettings(!settingsVisible) }
+
+            val animMiddle = AnimationUtils.loadAnimation(context!!, R.anim.reader_emergence_middle)
+            reader_blackout.startAnimation(animMiddle)
         } else {
             toolbar_settings.setOnClickListener(null)
             toolbar_settings.isClickable = false
@@ -193,15 +198,9 @@ class ReaderFragment : Fragment() {
     }
 
     private fun showSettings(visible: Boolean) {
-        reader_blackout.visibility = if (visible) View.VISIBLE else View.GONE
         reader_settings_panel.visibility = if (visible) View.VISIBLE else View.GONE
 
         settingsVisible = visible
-        if (visible) {
-            val animMiddle = AnimationUtils.loadAnimation(context!!, R.anim.reader_emergence_middle)
-
-            reader_blackout.startAnimation(animMiddle)
-        }
     }
 
     private fun setReaderColorAndWritePref(color: ReaderColor, preferences: SharedPreferences) {

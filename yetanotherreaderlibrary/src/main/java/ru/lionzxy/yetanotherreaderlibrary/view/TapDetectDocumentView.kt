@@ -6,7 +6,7 @@ import android.support.v4.view.GestureDetectorCompat
 import android.util.AttributeSet
 import android.view.GestureDetector
 import android.view.MotionEvent
-import android.widget.ScrollView
+import com.bluejamesbond.text.DocumentView
 
 /**
  * @author Nikita Kulikov <nikita@kulikof.ru>
@@ -14,13 +14,15 @@ import android.widget.ScrollView
  * @date 16.04.18
  */
 
-class TapDetectDocumentView : ScrollView {
+class TapDetectDocumentView : DocumentView {
     private val gestureListener = GestureListener()
     private val gestureDetector: GestureDetectorCompat = GestureDetectorCompat(context, gestureListener)
 
     constructor(context: Context, attrs: AttributeSet?, defStyle: Int) : super(context, attrs, defStyle)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
     constructor(context: Context) : super(context)
+
+    override fun onInterceptTouchEvent(ev: MotionEvent?) = true
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(ev: MotionEvent?): Boolean {

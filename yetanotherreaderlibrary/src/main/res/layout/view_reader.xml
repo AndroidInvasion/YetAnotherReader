@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ReaderFragment">
 
-    <ru.lionzxy.yetanotherreaderlibrary.view.TapDetectDocumentView
+    <ScrollView
         android:id="@+id/reader_scrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.bluejamesbond.text.DocumentView
+            <ru.lionzxy.yetanotherreaderlibrary.view.TapDetectDocumentView
                 android:id="@+id/text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -123,5 +123,5 @@
                     app:layout_constraintTop_toBottomOf="@id/reader_imread_buy" />
             </android.support.constraint.ConstraintLayout>
         </LinearLayout>
-    </ru.lionzxy.yetanotherreaderlibrary.view.TapDetectDocumentView>
+    </ScrollView>
 </merge>
