@@ -57,16 +57,16 @@ class ReaderFragment : Fragment() {
         text.documentLayoutParams.isHyphenated = true
         text.setOnLayoutProgressListener(object : DocumentView.ILayoutProgressListener {
             override fun onFinish() {
-                progressbar.hide()
+                progressbar?.hide()
             }
 
             override fun onProgressUpdate(progress: Float) {}
             override fun onCancelled() {
-                progressbar.hide()
+                progressbar?.hide()
             }
 
             override fun onStart() {
-                progressbar.show()
+                progressbar?.show()
             }
         })
         reader_seek_bar.setScrollView(reader_scrollview)
