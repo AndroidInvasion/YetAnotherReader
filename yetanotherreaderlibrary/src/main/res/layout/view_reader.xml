@@ -31,7 +31,7 @@
                 android:id="@+id/reader_buy"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="16dp">
+                android:layout_margin="16dp">
 
                 <TextView
                     android:id="@+id/reader_imread_title"
@@ -81,14 +81,14 @@
 
                 <TextView
                     android:id="@+id/reader_imread_bookdescription"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
                     android:layout_marginStart="16dp"
-                    android:ellipsize="end"
                     android:maxLines="6"
-                    android:scrollHorizontally="true"
-                    android:singleLine="false"
                     android:textColor="@android:color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintLeft_toRightOf="@id/reader_imread_image"
                     app:layout_constraintStart_toEndOf="@id/reader_imread_image"
                     app:layout_constraintTop_toBottomOf="@id/reader_imread_bookauthor"
                     tools:text="Джон Голдsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss sdfsdfdsfsdf sdfassdfsd sdfdsfsdfdsf" />
