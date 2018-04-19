@@ -21,6 +21,7 @@ import kotlinx.android.synthetic.main.view_reader_settings.*
 import ru.lionzxy.yetanotherreaderlibrary.data.Book
 import ru.lionzxy.yetanotherreaderlibrary.data.GlideApp
 import ru.lionzxy.yetanotherreaderlibrary.data.ReaderColor
+import ru.lionzxy.yetanotherreaderlibrary.utils.AsyncListener
 
 /**
  * @author Nikita Kulikov <nikita@kulikof.ru>
@@ -33,6 +34,7 @@ class ReaderFragment : Fragment() {
     private var settingsVisible = false
     private var nextListener: (() -> Unit)? = null
     private var buyListener: ((book: Book?) -> Unit)? = null
+    private var layoutProgressListener: AsyncListener? = null
     private var book: Book? = null
 
     companion object {
@@ -55,7 +57,7 @@ class ReaderFragment : Fragment() {
         text.documentLayoutParams.textAlignment = TextAlignment.JUSTIFIED
         text.documentLayoutParams.hyphenator = DefaultHyphenator.getInstance(com.bluejamesbond.text.R.raw.ru, context)
         text.documentLayoutParams.isHyphenated = true
-        text.setOnLayoutProgressListener(object : DocumentView.ILayoutProgressListener {
+        layoutProgressListener = AsyncListener(object : DocumentView.ILayoutProgressListener {
             override fun onFinish() {
                 progressbar?.hide()
             }
@@ -69,6 +71,7 @@ class ReaderFragment : Fragment() {
                 progressbar?.show()
             }
         })
+        text.setOnLayoutProgressListener(layoutProgressListener)
         reader_seek_bar.setScrollView(reader_scrollview)
         toolbar_back.setOnClickListener { activity?.onBackPressed() }
         settings_next.setOnClickListener { nextListener?.invoke() }
@@ -206,6 +209,11 @@ class ReaderFragment : Fragment() {
     private fun setReaderColorAndWritePref(color: ReaderColor, preferences: SharedPreferences) {
         preferences.edit().putInt("reader_color", color.id).apply()
         setReaderColor(color)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        layoutProgressListener?.listener = null
     }
 
     @Suppress("DEPRECATION")
