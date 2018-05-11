@@ -14,7 +14,7 @@ import com.bluejamesbond.text.DocumentView
  * @date 16.04.18
  */
 
-class TapDetectDocumentView : DocumentView {
+class GestureResponsiveDocumentView : DocumentView {
     private val gestureListener = GestureListener()
     private val gestureDetector: GestureDetectorCompat = GestureDetectorCompat(context, gestureListener)
 
