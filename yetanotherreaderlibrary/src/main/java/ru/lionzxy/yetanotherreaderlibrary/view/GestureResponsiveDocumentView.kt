@@ -69,6 +69,31 @@ class GestureResponsiveDocumentView : DocumentView {
         }
     }
 
+    fun setFlingUpBoundaryVelocity(velocity: Float) {
+        gestureListener.flingUpBoundaryVelocity = velocity
+    }
+    fun setFlingDownBoundaryVelocity(velocity: Float) {
+        gestureListener.flingDownBoundaryVelocity = velocity
+    }
+    fun setFlingLeftBoundaryVelocity(velocity: Float) {
+        gestureListener.flingLeftBoundaryVelocity = velocity
+    }
+    fun setFlingRightBoundaryVelocity(velocity: Float) {
+        gestureListener.flingRightBoundaryVelocity = velocity
+    }
+    fun setFlingHorizontalBoundaryVelocity(velocity: Float) {
+        setFlingLeftBoundaryVelocity(velocity)
+        setFlingRightBoundaryVelocity(velocity)
+    }
+    fun setFlingVerticalBoundaryVelocity(velocity: Float) {
+        setFlingUpBoundaryVelocity(velocity)
+        setFlingDownBoundaryVelocity(velocity)
+    }
+    fun setFlingBoundaryVelocity(velocity: Float) {
+        setFlingVerticalBoundaryVelocity(velocity)
+        setFlingHorizontalBoundaryVelocity(velocity)
+    }
+
     class GestureListener : GestureDetector.SimpleOnGestureListener() {
         var flingUpBoundaryVelocity = 0F
         var flingDownBoundaryVelocity = 0F
