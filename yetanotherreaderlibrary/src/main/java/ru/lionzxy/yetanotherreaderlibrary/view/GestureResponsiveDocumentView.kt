@@ -46,8 +46,33 @@ class GestureResponsiveDocumentView : DocumentView {
         }
     }
 
+    @Suppress("unused")
+    fun setFlingListener(listener: FlingListener) {
+        gestureListener.flingListener = listener
+    }
+
+    fun setFlingListener(flingUpListener: (() -> Unit)? = null, flingDownListener: (() -> Unit)? = null,
+                         flingLeftListener: (() -> Unit)? = null, flingRightListener: (() -> Unit)? = null) {
+        gestureListener.flingListener = object : FlingListener {
+            override fun onFlingUp() {
+                flingUpListener?.invoke()
+            }
+            override fun onFlingDown() {
+                flingDownListener?.invoke()
+            }
+            override fun onFlingLeft() {
+                flingLeftListener?.invoke()
+            }
+            override fun onFlingRight() {
+                flingRightListener?.invoke()
+            }
+        }
+    }
+
     class GestureListener : GestureDetector.SimpleOnGestureListener() {
         var tapListener: TapListener? = null
+        var flingListener: FlingListener? = null
+
         override fun onSingleTapConfirmed(e: MotionEvent?): Boolean {
             tapListener?.onSingleTap()
             return true
@@ -61,5 +86,12 @@ class GestureResponsiveDocumentView : DocumentView {
 
     interface TapListener {
         fun onSingleTap()
+    }
+
+    interface FlingListener {
+        fun onFlingLeft()
+        fun onFlingRight()
+        fun onFlingUp()
+        fun onFlingDown()
     }
 }
