@@ -36,6 +36,7 @@ class ReaderFragment : Fragment() {
     private var buyListener: ((book: Book?) -> Unit)? = null
     private var layoutProgressListener: AsyncListener? = null
     private var book: Book? = null
+    private var currentPage = 0
 
     companion object {
         const val TAG = "ru.lionzxy.yetanotherreaderlibrary.ReaderFragment"
@@ -98,6 +99,16 @@ class ReaderFragment : Fragment() {
         reader_scrollview.scrollTo(reader_scrollview.scrollX, 0)
         arguments?.putSerializable("book", book)
         setBookInside(book)
+    }
+
+    @Suppress("unused")
+    fun setCurrentPage(page: Int) {
+        turnPage(page)
+    }
+
+    @Suppress("unused")
+    fun getCurrentPage(): Int {
+        return currentPage
     }
 
     @Suppress("unused")
