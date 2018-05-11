@@ -40,6 +40,7 @@ class ReaderFragment : Fragment() {
 
     companion object {
         const val TAG = "ru.lionzxy.yetanotherreaderlibrary.ReaderFragment"
+        const val TURN_PAGE_BOUNDARY_VELOCITY = 800F
 
         fun getReaderColor(context: Context): ReaderColor {
             val preferences = context.getSharedPreferences("reader", Context.MODE_PRIVATE)
@@ -86,6 +87,9 @@ class ReaderFragment : Fragment() {
         }
 
         text.setTapListener({ showInfo(!infoVisible) })
+        text.setFlingBoundaryVelocity(TURN_PAGE_BOUNDARY_VELOCITY)
+        text.setFlingListener(flingLeftListener = { turnPageBack() },
+                              flingRightListener = { turnPageForward() })
         setSettings(view.context)
 
         val book = arguments?.get("book")
