@@ -6,7 +6,7 @@ import android.support.v4.view.GestureDetectorCompat
 import android.util.AttributeSet
 import android.view.GestureDetector
 import android.view.MotionEvent
-import com.bluejamesbond.text.DocumentView
+import com.bluejamesbond.text.PaginatedDocumentView
 
 /**
  * @author Nikita Kulikov <nikita@kulikof.ru>
@@ -14,7 +14,7 @@ import com.bluejamesbond.text.DocumentView
  * @date 16.04.18
  */
 
-class GestureResponsiveDocumentView : DocumentView {
+class GestureResponsiveDocumentView : PaginatedDocumentView {
     private val gestureListener = GestureListener()
     private val gestureDetector: GestureDetectorCompat = GestureDetectorCompat(context, gestureListener)
 
