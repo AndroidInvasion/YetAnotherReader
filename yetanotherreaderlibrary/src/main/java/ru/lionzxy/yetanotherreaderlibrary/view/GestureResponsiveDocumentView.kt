@@ -70,6 +70,11 @@ class GestureResponsiveDocumentView : DocumentView {
     }
 
     class GestureListener : GestureDetector.SimpleOnGestureListener() {
+        var flingUpBoundaryVelocity = 0F
+        var flingDownBoundaryVelocity = 0F
+        var flingLeftBoundaryVelocity = 0F
+        var flingRightBoundaryVelocity = 0F
+
         var tapListener: TapListener? = null
         var flingListener: FlingListener? = null
 
@@ -79,6 +84,22 @@ class GestureResponsiveDocumentView : DocumentView {
         }
 
         override fun onDown(e: MotionEvent?): Boolean {
+            return true
+        }
+
+        override fun onFling(e1: MotionEvent?, e2: MotionEvent?, velocityX: Float, velocityY: Float): Boolean {
+            if (-velocityX > flingRightBoundaryVelocity) {
+                flingListener?.onFlingRight()
+            }
+            if (velocityX > flingLeftBoundaryVelocity) {
+                flingListener?.onFlingLeft()
+            }
+            if (-velocityY > flingUpBoundaryVelocity) {
+                flingListener?.onFlingUp()
+            }
+            if (velocityY > flingDownBoundaryVelocity) {
+                flingListener?.onFlingDown()
+            }
             return true
         }
 
