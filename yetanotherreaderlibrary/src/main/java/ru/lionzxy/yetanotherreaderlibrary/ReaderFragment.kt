@@ -102,6 +102,16 @@ class ReaderFragment : Fragment() {
     }
 
     @Suppress("unused")
+    fun turnPageForward() {
+        turnPage(currentPage + 1)
+    }
+
+    @Suppress("unused")
+    fun turnPageBack() {
+        turnPage(currentPage - 1)
+    }
+
+    @Suppress("unused")
     fun setCurrentPage(page: Int) {
         turnPage(page)
     }
@@ -135,6 +145,11 @@ class ReaderFragment : Fragment() {
             progressbar.hide()
             reader_scrollview.visibility = View.VISIBLE
         }
+    }
+
+    private fun turnPage(page: Int) {
+        currentPage = if (page < 0) 0 else if (page > text.pageCount) text.pageCount else page
+        text.currentPage = currentPage
     }
 
     private fun setBookInside(book: Book) {
