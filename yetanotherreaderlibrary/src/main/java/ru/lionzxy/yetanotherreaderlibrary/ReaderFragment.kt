@@ -74,6 +74,7 @@ class ReaderFragment : Fragment() {
             }
         })
         text.setOnLayoutProgressListener(layoutProgressListener)
+        text.setPaginated(true)
         reader_seek_bar.setScrollView(reader_scrollview)
         toolbar_back.setOnClickListener { activity?.onBackPressed() }
         settings_next.setOnClickListener { nextListener?.invoke() }
@@ -152,8 +153,8 @@ class ReaderFragment : Fragment() {
     }
 
     private fun turnPage(page: Int) {
-        currentPage = if (page < 0) 0 else if (page > text.pageCount) text.pageCount else page
-        text.currentPage = currentPage
+        currentPage = if (page < 0) 0 else if (page > text.getPageCount()) text.getPageCoun() else page
+        text.turnPage(currentPage)
     }
 
     private fun setBookInside(book: Book) {
