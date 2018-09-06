@@ -36,9 +36,11 @@ class ReaderFragment : Fragment() {
     private var buyListener: ((book: Book?) -> Unit)? = null
     private var layoutProgressListener: AsyncListener? = null
     private var book: Book? = null
+    private var currentPage = 0
 
     companion object {
         const val TAG = "ru.lionzxy.yetanotherreaderlibrary.ReaderFragment"
+        const val TURN_PAGE_BOUNDARY_VELOCITY = 800F
 
         fun getReaderColor(context: Context): ReaderColor {
             val preferences = context.getSharedPreferences("reader", Context.MODE_PRIVATE)
@@ -72,6 +74,7 @@ class ReaderFragment : Fragment() {
             }
         })
         text.setOnLayoutProgressListener(layoutProgressListener)
+        text.setPaginated(true)
         reader_seek_bar.setScrollView(reader_scrollview)
         toolbar_back.setOnClickListener { activity?.onBackPressed() }
         settings_next.setOnClickListener { nextListener?.invoke() }
@@ -85,6 +88,9 @@ class ReaderFragment : Fragment() {
         }
 
         text.setTapListener({ showInfo(!infoVisible) })
+        text.setFlingBoundaryVelocity(TURN_PAGE_BOUNDARY_VELOCITY)
+        text.setFlingListener(flingLeftListener = { turnPageBack() },
+                              flingRightListener = { turnPageForward() })
         setSettings(view.context)
 
         val book = arguments?.get("book")
@@ -98,6 +104,26 @@ class ReaderFragment : Fragment() {
         reader_scrollview.scrollTo(reader_scrollview.scrollX, 0)
         arguments?.putSerializable("book", book)
         setBookInside(book)
+    }
+
+    @Suppress("unused")
+    fun turnPageForward() {
+        turnPage(currentPage + 1)
+    }
+
+    @Suppress("unused")
+    fun turnPageBack() {
+        turnPage(currentPage - 1)
+    }
+
+    @Suppress("unused")
+    fun setCurrentPage(page: Int) {
+        turnPage(page)
+    }
+
+    @Suppress("unused")
+    fun getCurrentPage(): Int {
+        return currentPage
     }
 
     @Suppress("unused")
@@ -124,6 +150,11 @@ class ReaderFragment : Fragment() {
             progressbar.hide()
             reader_scrollview.visibility = View.VISIBLE
         }
+    }
+
+    private fun turnPage(page: Int) {
+        currentPage = if (page < 0) 0 else if (page > text.getPageCount()) text.getPageCoun() else page
+        text.turnPage(currentPage)
     }
 
     private fun setBookInside(book: Book) {

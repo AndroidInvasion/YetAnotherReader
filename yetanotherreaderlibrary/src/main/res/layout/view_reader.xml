@@ -18,7 +18,7 @@
             android:gravity="end"
             android:orientation="vertical">
 
-            <ru.lionzxy.yetanotherreaderlibrary.view.TapDetectDocumentView
+            <ru.lionzxy.yetanotherreaderlibrary.view.GestureResponsiveDocumentView
                 android:id="@+id/text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
